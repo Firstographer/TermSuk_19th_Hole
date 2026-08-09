@@ -1,0 +1,8 @@
+{
+  "name": "เติมสุข 19th Hole",
+  "short_name": "เติมสุข 19th",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a"
+}
