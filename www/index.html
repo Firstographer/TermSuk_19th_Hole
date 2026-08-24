@@ -512,11 +512,12 @@
                 ? `<button type="button" class="btn btn-outline-danger border-0 px-2 fs-5" onclick="removeSetupPlayer(${i})">🗑️</button>`
                 : '';
 
+            // แก้ไขแท็ก label เปลี่ยนจาก onclick เป็นใช้ for="photo_i" เพื่อแก้บั๊กมือถือไม่ยอมเปิดกล้อง
             pContainer.innerHTML += `
                 <div class="d-flex align-items-center gap-3 bg-light p-3 rounded-4 border shadow-sm position-relative">
                     <div class="position-relative">
                         <img id="preview_${i}" class="player-photo-preview bg-white" src="${photoUrl}">
-                        <label onclick="document.getElementById('photo_${i}').click()" class="position-absolute bottom-0 end-0 bg-success text-white rounded-circle d-flex justify-content-center align-items-center shadow" style="width:26px;height:26px;cursor:pointer;font-size:12px; z-index: 10;">📷</label>
+                        <label for="photo_${i}" class="position-absolute bottom-0 end-0 bg-success text-white rounded-circle d-flex justify-content-center align-items-center shadow" style="width:26px;height:26px;cursor:pointer;font-size:12px; z-index: 10;">📷</label>
                         <input type="file" id="photo_${i}" class="d-none" accept="image/*" onchange="previewImageCompressed(this, 'preview_${i}', ${i})">
                     </div>
                     <div class="flex-grow-1">
