@@ -216,7 +216,8 @@
                         <h5 class="card-title text-dark fw-bold mb-0">2. ข้อมูลผู้เล่น</h5>
                         <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="showManageGolfersModal()">⚙️ จัดการรายชื่อ</button>
                     </div>
-                    <div id="playerInputs" class="d-flex flex-column gap-3"></div>
+                    <div id="playerInputs" class="d-flex flex-column gap-3 mb-3"></div>
+                    <button id="btnAddPlayer" class="btn btn-outline-success w-100 rounded-pill border-2 fw-bold" onclick="addSetupPlayer()" style="display: none;">➕ เพิ่มผู้เล่น (สูงสุด 6 คน)</button>
                 </div>
             </div>
             
@@ -229,7 +230,7 @@
             </div>
             
             <div class="d-flex justify-content-between gap-2 mb-4">
-                <button class="btn btn-light border btn-lg rounded-pill px-4 fw-bold" onclick="switchSection('setup-section')">กลับ</button>
+                <button class="btn btn-light border btn-lg rounded-pill px-4 fw-bold" onclick="goBackToSetup()">กลับ</button>
                 <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fw-bold py-3" onclick="startGame()">⛳ เริ่มเล่นเลย!</button>
             </div>
         </div>
@@ -337,7 +338,7 @@
     </div>
 </div>
 
-<!-- Modal จัดการรายชื่อผู้เล่น -->
+<!-- Modals ... -->
 <div class="modal fade" id="manageGolfersModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -352,7 +353,6 @@
   </div>
 </div>
 
-<!-- Modal เลือกหลุมเพื่อกระโดดไปแก้ไข -->
 <div class="modal fade" id="jumpHoleModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -368,7 +368,6 @@
   </div>
 </div>
 
-<!-- Modal สรุปเงินแต่ละหลุม -->
 <div class="modal fade" id="holeSummaryModal" tabindex="-1" data-bs-backdrop="static">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -388,7 +387,6 @@
   </div>
 </div>
 
-<!-- Modal Leaderboard -->
 <div class="modal fade" id="leaderboardModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -414,7 +412,6 @@
   </div>
 </div>
 
-<!-- Modal ประวัติย้อนหลัง -->
 <div class="modal fade" id="historyModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -447,6 +444,7 @@
     };
     
     let tempPlayerPhotos = {}; 
+    let tempPlayerNames = {}; 
     let holeSummaryModalInstance = null;
     let jumpHoleModalInstance = null;
     let manageGolfersModalInstance = null;
@@ -494,6 +492,85 @@
         window.scrollTo(0,0);
     }
 
+    // ซิงก์ข้อมูลจากช่องกรอกชื่อมาเก็บไว้ที่ตัวแปรกลาง
+    function syncSetupPlayersData() {
+        for (let i = 0; i < setupPlayerCountVal; i++) {
+            let input = document.getElementById(`playerName_${i}`);
+            if (input) tempPlayerNames[i] = input.value;
+        }
+    }
+
+    function renderPlayerSetupList() {
+        const pContainer = document.getElementById('playerInputs'); 
+        pContainer.innerHTML = '';
+        
+        for (let i = 0; i < setupPlayerCountVal; i++) {
+            let photoUrl = tempPlayerPhotos[i] || createEmojiAvatar(i);
+            let pName = tempPlayerNames[i] || '';
+            
+            let delBtn = setupPlayerCountVal > 1 
+                ? `<button type="button" class="btn btn-outline-danger border-0 px-2 fs-5" onclick="removeSetupPlayer(${i})">🗑️</button>`
+                : '';
+
+            pContainer.innerHTML += `
+                <div class="d-flex align-items-center gap-3 bg-light p-3 rounded-4 border shadow-sm position-relative">
+                    <div class="position-relative">
+                        <img id="preview_${i}" class="player-photo-preview bg-white" src="${photoUrl}">
+                        <label onclick="document.getElementById('photo_${i}').click()" class="position-absolute bottom-0 end-0 bg-success text-white rounded-circle d-flex justify-content-center align-items-center shadow" style="width:26px;height:26px;cursor:pointer;font-size:12px; z-index: 10;">📷</label>
+                        <input type="file" id="photo_${i}" class="d-none" accept="image/*" onchange="previewImageCompressed(this, 'preview_${i}', ${i})">
+                    </div>
+                    <div class="flex-grow-1">
+                        <input type="text" id="playerName_${i}" list="savedGolfersList" class="form-control border-0 bg-white shadow-sm fw-bold fs-5 px-3 py-2 rounded-3" placeholder="Golfer ${i+1}" autocomplete="off" value="${pName}">
+                    </div>
+                    ${delBtn}
+                </div>`;
+        }
+
+        const btnAdd = document.getElementById('btnAddPlayer');
+        if (btnAdd) {
+            btnAdd.style.display = (setupPlayerCountVal < 6) ? 'block' : 'none';
+        }
+        
+        // ซิงก์ตัวเลขกลับไปที่หน้า 1 เผื่อผู้ใช้กดย้อนกลับ
+        document.getElementById('playerCountDisplay').innerText = setupPlayerCountVal;
+        document.getElementById('btn_player_minus').style.visibility = (setupPlayerCountVal <= 1) ? 'hidden' : 'visible';
+        document.getElementById('btn_player_plus').style.visibility = (setupPlayerCountVal >= 6) ? 'hidden' : 'visible';
+    }
+
+    function addSetupPlayer() {
+        if (setupPlayerCountVal >= 6) return;
+        syncSetupPlayersData();
+        
+        let newIndex = setupPlayerCountVal;
+        tempPlayerPhotos[newIndex] = createEmojiAvatar(newIndex);
+        tempPlayerNames[newIndex] = '';
+        
+        setupPlayerCountVal++;
+        renderPlayerSetupList();
+    }
+
+    function removeSetupPlayer(indexToRemove) {
+        if (setupPlayerCountVal <= 1) return;
+        syncSetupPlayersData();
+        
+        // เลื่อนข้อมูลลงมาแทนที่ตำแหน่งที่ถูกลบ
+        for (let i = indexToRemove; i < setupPlayerCountVal - 1; i++) {
+            tempPlayerPhotos[i] = tempPlayerPhotos[i + 1];
+            tempPlayerNames[i] = tempPlayerNames[i + 1];
+        }
+        // ลบข้อมูล Index สุดท้ายทิ้ง
+        delete tempPlayerPhotos[setupPlayerCountVal - 1];
+        delete tempPlayerNames[setupPlayerCountVal - 1];
+        
+        setupPlayerCountVal--;
+        renderPlayerSetupList();
+    }
+
+    function goBackToSetup() {
+        syncSetupPlayersData(); // จำค่าที่ผู้ใช้กรอกล่าสุดไว้ก่อนกลับหน้าแรก
+        switchSection('setup-section');
+    }
+
     function goToConfig() {
         const cType = document.getElementById('courseSelect').value;
         if (cType === 'bhumibol') {
@@ -505,7 +582,6 @@
         gameState.totalHoles = parseInt(document.getElementById('totalHoles').value);
         gameState.startHole = parseInt(document.getElementById('startHole').value);
         gameState.baseBet = parseInt(document.getElementById('baseBet').value) || 0;
-        const playerCount = setupPlayerCountVal;
 
         gameState.holeSequence = [];
         let currentH = gameState.startHole;
@@ -517,25 +593,13 @@
         let savedGolfers = JSON.parse(localStorage.getItem(SAVED_GOLFERS_KEY) || '[]');
         document.getElementById('savedGolfersList').innerHTML = savedGolfers.map(n => `<option value="${n}">`).join('');
 
-        const pContainer = document.getElementById('playerInputs'); pContainer.innerHTML = '';
-        tempPlayerPhotos = {}; 
-
-        for (let i = 0; i < playerCount; i++) {
-            const defAv = createEmojiAvatar(i);
-            tempPlayerPhotos[i] = defAv; 
-            
-            pContainer.innerHTML += `
-                <div class="d-flex align-items-center gap-3 bg-light p-3 rounded-4 border shadow-sm">
-                    <div class="position-relative">
-                        <img id="preview_${i}" class="player-photo-preview bg-white" src="${defAv}">
-                        <label onclick="document.getElementById('photo_${i}').click()" class="position-absolute bottom-0 end-0 bg-success text-white rounded-circle d-flex justify-content-center align-items-center shadow" style="width:26px;height:26px;cursor:pointer;font-size:12px; z-index: 10;">📷</label>
-                        <input type="file" id="photo_${i}" class="d-none" accept="image/*" onchange="previewImageCompressed(this, 'preview_${i}', ${i})">
-                    </div>
-                    <div class="flex-grow-1">
-                        <input type="text" id="playerName_${i}" list="savedGolfersList" class="form-control border-0 bg-white shadow-sm fw-bold fs-5 px-3 py-2 rounded-3" placeholder="Golfer ${i+1}" autocomplete="off">
-                    </div>
-                </div>`;
+        // สร้างข้อมูลเริ่มต้นให้ครบตามจำนวนที่เลือกมาจากหน้า 1 (ถ้ายังไม่มีข้อมูล)
+        for (let i = 0; i < setupPlayerCountVal; i++) {
+            if (!tempPlayerPhotos[i]) tempPlayerPhotos[i] = createEmojiAvatar(i);
+            if (tempPlayerNames[i] === undefined) tempPlayerNames[i] = '';
         }
+
+        renderPlayerSetupList();
 
         const parContainer = document.getElementById('parInputs'); parContainer.innerHTML = '';
         gameState.holeSequence.forEach((hole) => {
@@ -560,7 +624,6 @@
         switchSection('config-section');
     }
 
-    // --- ฟังก์ชันสำหรับลบรายชื่อ Autofill ---
     function showManageGolfersModal() {
         let savedGolfers = JSON.parse(localStorage.getItem(SAVED_GOLFERS_KEY) || '[]');
         let listContainer = document.getElementById('manageGolfersList');
@@ -589,13 +652,9 @@
         savedGolfers.splice(index, 1);
         localStorage.setItem(SAVED_GOLFERS_KEY, JSON.stringify(savedGolfers));
         
-        // อัปเดต datalist หน้าจอหลัก
         document.getElementById('savedGolfersList').innerHTML = savedGolfers.map(n => `<option value="${n}">`).join('');
-        
-        // รีเฟรชรายการใน Modal
         showManageGolfersModal();
     }
-    // ------------------------------------
 
     function adjustConfigPar(hole, amount) {
         const spanEl = document.getElementById(`par_val_${hole}`);
