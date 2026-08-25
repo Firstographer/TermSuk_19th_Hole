@@ -154,7 +154,6 @@
         <p class="text-white-50 small mb-0">Golf Score & Bet Tracker</p>
     </div>
 
-    <!-- Datalist สำหรับเก็บรายชื่อแบบ Autofill -->
     <datalist id="savedGolfersList"></datalist>
 
     <!-- Section 1: ตั้งค่าเริ่มต้น -->
@@ -310,7 +309,7 @@
             </div>
 
             <button class="btn btn-info btn-lg w-100 rounded-pill shadow-sm mb-4 fw-bold text-white py-3" onclick="downloadScorecardImage()">
-                📸 บันทึกตารางสกอร์ลงอัลบั้ม
+                📸 บันทึกตารางสกอร์ลงเครื่อง
             </button>
 
             <div id="financialExportArea" class="card shadow border-warning border-2 mb-3 bg-white">
@@ -326,7 +325,7 @@
             </div>
 
             <button class="btn btn-warning btn-lg w-100 rounded-pill shadow-sm mb-4 fw-bold text-dark py-3" onclick="downloadFinancialSummary()">
-                📸 บันทึกบิลเก็บเงินลงอัลบั้ม
+                📸 บันทึกบิลเก็บเงินลงเครื่อง
             </button>
 
             <div class="card shadow mb-4">
@@ -338,7 +337,7 @@
     </div>
 </div>
 
-<!-- Modal จัดการรายชื่อผู้เล่น -->
+<!-- Modals -->
 <div class="modal fade" id="manageGolfersModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -353,7 +352,6 @@
   </div>
 </div>
 
-<!-- Modal เลือกหลุมเพื่อกระโดดไปแก้ไข -->
 <div class="modal fade" id="jumpHoleModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -369,7 +367,6 @@
   </div>
 </div>
 
-<!-- Modal สรุปเงินแต่ละหลุม -->
 <div class="modal fade" id="holeSummaryModal" tabindex="-1" data-bs-backdrop="static">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -389,7 +386,6 @@
   </div>
 </div>
 
-<!-- Modal Leaderboard -->
 <div class="modal fade" id="leaderboardModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -415,7 +411,6 @@
   </div>
 </div>
 
-<!-- Modal ประวัติย้อนหลัง -->
 <div class="modal fade" id="historyModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -496,7 +491,6 @@
         window.scrollTo(0,0);
     }
 
-    // ซิงก์ข้อมูลจากช่องกรอกชื่อมาเก็บไว้ที่ตัวแปรกลาง
     function syncSetupPlayersData() {
         for (let i = 0; i < setupPlayerCountVal; i++) {
             let input = document.getElementById(`playerName_${i}`);
@@ -506,8 +500,8 @@
 
     function renderPlayerSetupList() {
         const pContainer = document.getElementById('playerInputs'); 
-        
         let newHtml = '';
+        
         for (let i = 0; i < setupPlayerCountVal; i++) {
             let photoUrl = tempPlayerPhotos[i] || createEmojiAvatar(i);
             let pName = tempPlayerNames[i] || '';
@@ -516,13 +510,20 @@
                 ? `<button type="button" class="btn btn-outline-danger border-0 px-2 fs-5" onclick="removeSetupPlayer(${i})">🗑️</button>`
                 : '';
 
-            // ✅ กลับมาใช้โค้ดดั้งเดิมใน V 1.3: onclick แบบ JS และ d-none ซึ่งรองรับ Android WebView สมบูรณ์แบบ
             newHtml += `
-                <div class="d-flex align-items-center gap-3 bg-light p-3 rounded-4 border shadow-sm position-relative mb-2">
-                    <div class="position-relative">
-                        <img id="preview_${i}" class="player-photo-preview bg-white" src="${photoUrl}">
-                        <label onclick="document.getElementById('photo_${i}').click()" class="position-absolute bottom-0 end-0 bg-success text-white rounded-circle d-flex justify-content-center align-items-center shadow" style="width:26px;height:26px;cursor:pointer;font-size:12px; z-index: 10;">📷</label>
-                        <input type="file" id="photo_${i}" class="d-none" accept="image/*" onchange="previewImageCompressed(this, 'preview_${i}', ${i})">
+                <div class="d-flex align-items-center gap-3 bg-light p-3 rounded-4 border shadow-sm mb-2">
+                    <div>
+                        <img id="preview_${i}" class="player-photo-preview bg-white mb-2 d-block mx-auto" src="${photoUrl}">
+                        <div class="d-flex gap-1 justify-content-center">
+                            <label class="btn btn-outline-success btn-sm py-0 px-2 rounded-pill fw-bold" style="font-size: 0.65rem; cursor: pointer;">
+                                📷 ถ่าย
+                                <input type="file" accept="image/*" capture="environment" class="d-none" onchange="previewImageCompressed(this, 'preview_${i}', ${i})">
+                            </label>
+                            <label class="btn btn-outline-primary btn-sm py-0 px-2 rounded-pill fw-bold" style="font-size: 0.65rem; cursor: pointer;">
+                                🖼️ ภาพ
+                                <input type="file" accept="image/*" class="d-none" onchange="previewImageCompressed(this, 'preview_${i}', ${i})">
+                            </label>
+                        </div>
                     </div>
                     <div class="flex-grow-1">
                         <input type="text" id="playerName_${i}" list="savedGolfersList" class="form-control border-0 bg-white shadow-sm fw-bold fs-5 px-3 py-2 rounded-3" placeholder="Golfer ${i+1}" autocomplete="off" value="${pName}" oninput="tempPlayerNames[${i}] = this.value">
@@ -538,7 +539,6 @@
             btnAdd.style.display = (setupPlayerCountVal < 6) ? 'block' : 'none';
         }
         
-        // ซิงก์ตัวเลขกลับไปที่หน้า 1 เผื่อผู้ใช้กดย้อนกลับ
         document.getElementById('playerCountDisplay').innerText = setupPlayerCountVal;
         document.getElementById('btn_player_minus').style.visibility = (setupPlayerCountVal <= 1) ? 'hidden' : 'visible';
         document.getElementById('btn_player_plus').style.visibility = (setupPlayerCountVal >= 6) ? 'hidden' : 'visible';
@@ -560,12 +560,10 @@
         if (setupPlayerCountVal <= 1) return;
         syncSetupPlayersData();
         
-        // เลื่อนข้อมูลลงมาแทนที่ตำแหน่งที่ถูกลบ
         for (let i = indexToRemove; i < setupPlayerCountVal - 1; i++) {
             tempPlayerPhotos[i] = tempPlayerPhotos[i + 1];
             tempPlayerNames[i] = tempPlayerNames[i + 1];
         }
-        // ลบข้อมูล Index สุดท้ายทิ้ง
         delete tempPlayerPhotos[setupPlayerCountVal - 1];
         delete tempPlayerNames[setupPlayerCountVal - 1];
         
@@ -574,7 +572,7 @@
     }
 
     function goBackToSetup() {
-        syncSetupPlayersData(); // จำค่าที่ผู้ใช้กรอกล่าสุดไว้ก่อนกลับหน้าแรก
+        syncSetupPlayersData();
         switchSection('setup-section');
     }
 
@@ -600,13 +598,11 @@
         let savedGolfers = JSON.parse(localStorage.getItem(SAVED_GOLFERS_KEY) || '[]');
         document.getElementById('savedGolfersList').innerHTML = savedGolfers.map(n => `<option value="${n}">`).join('');
 
-        // สร้างข้อมูลเริ่มต้นให้ครบตามจำนวนที่เลือกมาจากหน้า 1 (ถ้ายังไม่มีข้อมูล)
         for (let i = 0; i < setupPlayerCountVal; i++) {
             if (!tempPlayerPhotos[i]) tempPlayerPhotos[i] = createEmojiAvatar(i);
             if (tempPlayerNames[i] === undefined) tempPlayerNames[i] = '';
         }
 
-        // วาดหน้าจอ UI
         renderPlayerSetupList();
 
         const parContainer = document.getElementById('parInputs'); parContainer.innerHTML = '';
@@ -659,7 +655,6 @@
         let savedGolfers = JSON.parse(localStorage.getItem(SAVED_GOLFERS_KEY) || '[]');
         savedGolfers.splice(index, 1);
         localStorage.setItem(SAVED_GOLFERS_KEY, JSON.stringify(savedGolfers));
-        
         document.getElementById('savedGolfersList').innerHTML = savedGolfers.map(n => `<option value="${n}">`).join('');
         showManageGolfersModal();
     }
@@ -680,26 +675,32 @@
 
     function previewImageCompressed(input, previewId, playerIndex) {
         if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) { 
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const MAX_SIZE = 200; 
-                    let width = img.width; let height = img.height;
-                    if (width > height) { if (width > MAX_SIZE) { height *= MAX_SIZE / width; width = MAX_SIZE; } }
-                    else { if (height > MAX_SIZE) { width *= MAX_SIZE / height; height = MAX_SIZE; } }
-                    canvas.width = width; canvas.height = height;
-                    const ctx = canvas.getContext('2d'); 
-                    ctx.drawImage(img, 0, 0, width, height);
-                    
-                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
-                    document.getElementById(previewId).src = compressedDataUrl;
-                    tempPlayerPhotos[playerIndex] = compressedDataUrl; 
-                }
-                img.src = e.target.result;
-            }
-            reader.readAsDataURL(input.files[0]);
+            const file = input.files[0];
+            const objectUrl = URL.createObjectURL(file);
+            const img = new Image();
+            
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const MAX_SIZE = 200; 
+                let width = img.width; let height = img.height;
+                if (width > height) { if (width > MAX_SIZE) { height *= MAX_SIZE / width; width = MAX_SIZE; } }
+                else { if (height > MAX_SIZE) { width *= MAX_SIZE / height; height = MAX_SIZE; } }
+                
+                canvas.width = width; canvas.height = height;
+                const ctx = canvas.getContext('2d'); 
+                ctx.drawImage(img, 0, 0, width, height);
+                
+                const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                document.getElementById(previewId).src = compressedDataUrl;
+                tempPlayerPhotos[playerIndex] = compressedDataUrl; 
+                
+                URL.revokeObjectURL(objectUrl);
+            };
+            img.onerror = function() {
+                alert("⚠️ ไม่สามารถโหลดรูปได้ (ไฟล์อาจใหญ่เกินไป หรือรูปแบบไฟล์ไม่รองรับ)");
+                URL.revokeObjectURL(objectUrl);
+            };
+            img.src = objectUrl;
         }
     }
 
@@ -713,7 +714,6 @@
 
         gameState.players = [];
         const pCount = setupPlayerCountVal;
-        
         let savedGolfers = JSON.parse(localStorage.getItem(SAVED_GOLFERS_KEY) || '[]');
 
         for (let i = 0; i < pCount; i++) {
@@ -839,10 +839,8 @@
         if (newPar >= 3 && newPar <= 5) {
             gameState.pars[hole] = newPar;
             document.getElementById('currentParDisplay').innerText = newPar;
-            
             document.getElementById('current_par_minus').style.visibility = (newPar <= 3) ? 'hidden' : 'visible';
             document.getElementById('current_par_plus').style.visibility = (newPar >= 5) ? 'hidden' : 'visible';
-            
             saveGame();
         }
     }
@@ -862,7 +860,6 @@
         
         const btnMinus = document.getElementById(`score_minus_${pIndex}`);
         if(btnMinus) btnMinus.style.visibility = (v <= 1) ? 'hidden' : 'visible';
-        
         saveScoresToState();
     }
 
@@ -873,10 +870,8 @@
             v = 1;
             input.value = 1;
         }
-        
         const btnMinus = document.getElementById(`score_minus_${pIndex}`);
         if(btnMinus) btnMinus.style.visibility = (v <= 1) ? 'hidden' : 'visible';
-        
         saveScoresToState(); 
     }
 
@@ -1112,17 +1107,43 @@
         location.reload();
     }
 
+    // 🛠️ ฟังก์ชันบันทึกภาพลงโฟลเดอร์ Download ของมือถือทันทีโดยไม่ต้องเปิดหน้าต่างแชร์
+    async function triggerNativeDownload(dataUrl, fileName) {
+        try {
+            if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Filesystem) {
+                const Filesystem = window.Capacitor.Plugins.Filesystem;
+                const base64Data = dataUrl.split(',')[1];
+
+                await Filesystem.writeFile({
+                    path: `Download/${fileName}`,
+                    data: base64Data,
+                    directory: 'EXTERNAL_STORAGE',
+                    recursive: true
+                });
+
+                alert("✅ บันทึกรูปภาพลงโฟลเดอร์ Download เรียบร้อยแล้ว!");
+            } else {
+                const link = document.createElement('a');
+                link.download = fileName;
+                link.href = dataUrl;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                alert("✅ ดาวน์โหลดลงเครื่องเรียบร้อยแล้ว!");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("⚠️ ไม่สามารถบันทึกไฟล์ได้: " + err.message);
+        }
+    }
+
+    // 📸 ฟังก์ชันบันทึกรูปทั้งหมด
     function downloadScorecardImage() {
         const exportElement = document.getElementById('scorecardExportArea');
         html2canvas(exportElement, { scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
             const dataUrl = canvas.toDataURL('image/png');
             const fileName = `TermSuk_19thHole_Scorecard_${Date.now()}.png`;
-            if (window.AndroidApp) { window.AndroidApp.saveBase64Image(dataUrl, fileName); } 
-            else {
-                const link = document.createElement('a'); link.download = fileName; link.href = dataUrl;
-                document.body.appendChild(link); link.click(); document.body.removeChild(link);
-                alert("✅ ดาวน์โหลดตารางสกอร์ลงเครื่องเรียบร้อยแล้ว!");
-            }
+            triggerNativeDownload(dataUrl, fileName);
         }).catch(err => alert("ไม่สามารถสร้างรูปภาพได้: " + err));
     }
 
@@ -1131,12 +1152,7 @@
         html2canvas(exportElement, { scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
             const dataUrl = canvas.toDataURL('image/png');
             const fileName = `TermSuk_19thHole_Finance_${Date.now()}.png`;
-            if (window.AndroidApp) { window.AndroidApp.saveBase64Image(dataUrl, fileName); } 
-            else {
-                const link = document.createElement('a'); link.download = fileName; link.href = dataUrl;
-                document.body.appendChild(link); link.click(); document.body.removeChild(link);
-                alert("✅ ดาวน์โหลดสรุปยอดเงินลงเครื่องเรียบร้อยแล้ว!");
-            }
+            triggerNativeDownload(dataUrl, fileName);
         }).catch(err => alert("ไม่สามารถสร้างรูปภาพได้: " + err));
     }
 
@@ -1145,12 +1161,7 @@
         html2canvas(exportElement, { scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
             const dataUrl = canvas.toDataURL('image/png');
             const fileName = `TermSuk_19thHole_History_${idx}_${Date.now()}.png`;
-            if (window.AndroidApp) { window.AndroidApp.saveBase64Image(dataUrl, fileName); } 
-            else {
-                const link = document.createElement('a'); link.download = fileName; link.href = dataUrl;
-                document.body.appendChild(link); link.click(); document.body.removeChild(link);
-                alert("✅ ดาวน์โหลดประวัติการแข่งขันลงเครื่องเรียบร้อยแล้ว!");
-            }
+            triggerNativeDownload(dataUrl, fileName);
         }).catch(err => alert("ไม่สามารถสร้างรูปภาพได้: " + err));
     }
 
