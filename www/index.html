@@ -115,7 +115,7 @@ body::before {
 #courseResultsContainer {
     display: flex;
     flex-direction: column;
-    gap: 12px; /* เว้นระยะห่างระหว่างการ์ดอย่างอิสระ ไม่ทับกัน */
+    gap: 12px;
     width: 100%;
 }
 
@@ -276,20 +276,21 @@ body::before {
                         <option value="">🗺️ ทุกจังหวัด (แสดงทั้งหมด)</option>
                     </select>
 
-                    <!-- รายชื่อสนามเรียงยาวตามธรรมชาติ ไม่ทับซ้อนกัน -->
-                    <div id="courseResultsContainer" class="mb-3"></div>
-                    
-                    <div class="text-center mt-3 pt-3 border-top">
-                        <button class="btn btn-light border w-100 fw-bold rounded-pill text-muted small py-2" onclick="selectCustomCourse()">
-                            + กำหนดสนามกอล์ฟเอง (กรณีค้นหาไม่พบ)
+                    <!-- ปุ่มเพิ่มสนามเอง -->
+                    <div class="mb-3">
+                        <button class="btn btn-outline-success w-100 fw-bold rounded-pill border-2 py-3 shadow-sm d-flex align-items-center justify-content-center gap-2" onclick="selectCustomCourseDirect()">
+                            <span style="font-size: 1.1rem;">✨</span> หาชื่อสนามไม่เจอ? เพิ่มสนามเองเลย!
                         </button>
                     </div>
+
+                    <!-- รายชื่อสนาม -->
+                    <div id="courseResultsContainer" class="mb-3"></div>
                 </div>
             </div>
-            <div class="d-flex justify-content-between gap-3 mb-4">
-                <button class="btn btn-light border btn-lg rounded-pill px-4 fw-bold" onclick="switchSection('home-section')">⬅️ กลับ</button>
-                <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fw-bold py-3" id="btnNextToCourseSettings" onclick="proceedToCourseSettings()" disabled>
-                    ต่อไป (ตั้งค่าการเล่น) ➔
+            <!-- ปุ่มหน้าแรกแบบยาวเต็มความกว้างสวยๆ ตามที่ต้องการ -->
+            <div class="mb-4">
+                <button class="btn btn-light border btn-lg w-100 rounded-pill fw-bold py-3 shadow-sm" onclick="switchSection('home-section')">
+                    🏠 หน้าแรก
                 </button>
             </div>
         </div>
@@ -328,7 +329,7 @@ body::before {
             </div>
             <div class="d-flex justify-content-between gap-3 mb-4">
                 <button class="btn btn-light border btn-lg rounded-pill px-4 fw-bold" onclick="switchSection('course-search-section')">⬅️ กลับ</button>
-                <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fw-bold py-3" onclick="proceedToPlayerSetup()">
+                <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fw-bold py-3" onclick="proceedToPlayerSetupFromSettings()">
                     ต่อไป (จัดก๊วนผู้เล่น) ➔
                 </button>
             </div>
@@ -339,7 +340,7 @@ body::before {
     <div id="par-config-section" class="section">
         <div class="mx-auto" style="max-width: 650px;">
             <div class="app-hero-card py-3 mb-3">
-                <h3 class="fw-bold mb-0 text-white">⚙️ ตรวจสอบค่า Par (สนามกำหนดเอง)</h3>
+                <h3 class="fw-bold mb-0 text-white">⚙️ กำหนดค่า Par สนามของคุณ</h3>
             </div>
             <div class="card mb-4">
                 <div class="card-body p-4">
@@ -349,9 +350,9 @@ body::before {
                 </div>
             </div>
             <div class="d-flex justify-content-between gap-3 mb-4">
-                <button class="btn btn-light border btn-lg rounded-pill px-4 fw-bold" onclick="switchSection('course-settings-section')">⬅️ กลับ</button>
-                <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fw-bold py-3" onclick="saveCustomCourseAndProceed()">
-                    ต่อไป (จัดก๊วนผู้เล่น) ➔
+                <button class="btn btn-light border btn-lg rounded-pill px-4 fw-bold" onclick="switchSection('course-search-section')">⬅️ กลับ</button>
+                <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fw-bold py-3" onclick="saveCustomCourseParsAndProceed()">
+                    ต่อไป (ตั้งค่าการเล่น) ➔
                 </button>
             </div>
         </div>
@@ -1614,7 +1615,6 @@ const GOLF_COURSES_DB = [
             return matchName && matchProv;
         });
 
-        // จัดเรียงลำดับ: จังหวัด -> ชื่อสนาม
         filtered.sort((a, b) => {
             let compProv = a.province.localeCompare(b.province, 'th');
             if (compProv !== 0) return compProv;
@@ -1629,14 +1629,12 @@ const GOLF_COURSES_DB = [
         container.innerHTML = '';
         
         if (courses.length === 0) {
-            container.innerHTML = `<div class="text-center text-muted p-4 bg-light rounded-4 border">❌ ไม่พบสนามที่ค้นหา<br><small>ลองเปลี่ยนคำค้นหา หรือกดกำหนดสนามเองด้านล่าง</small></div>`;
+            container.innerHTML = `<div class="text-center text-muted p-3 bg-white rounded-3 border small">❌ ไม่พบสนามที่ค้นหาตามเงื่อนไข</div>`;
             return;
         }
 
         courses.forEach(c => {
             const isSelected = (selectedCourseData && selectedCourseData.id === c.id) ? 'selected' : '';
-            
-            // ชื่อสนามอยู่ซ้าย | จังหวัดดันไปขวาตรงกันทุกอัน | ไอคอนข้อมูลขวาสุด
             container.innerHTML += `
                 <div class="card course-card ${isSelected} shadow-sm" onclick="previewCourse('${c.id}')">
                     <div class="d-flex align-items-center justify-content-between w-100">
@@ -1657,7 +1655,6 @@ const GOLF_COURSES_DB = [
         selectedCourseData = course; 
         
         filterCourses();
-        document.getElementById('btnNextToCourseSettings').disabled = false;
 
         document.getElementById('infoModalTitle').innerText = course.name;
         document.getElementById('infoModalProv').innerText = `📍 จังหวัด${course.province}`;
@@ -1686,11 +1683,13 @@ const GOLF_COURSES_DB = [
         proceedToCourseSettings();
     }
 
-    function selectCustomCourse() {
+    function selectCustomCourseDirect() {
         selectedCourseData = { id: 'custom', name: 'สนามกำหนดเอง', province: 'ระบุเอง', holes: [] };
         for(let i=0; i<18; i++) selectedCourseData.holes.push({ par:4, hc: '-' });
-        document.getElementById('btnNextToCourseSettings').disabled = false;
-        proceedToCourseSettings();
+        
+        document.getElementById('customCourseNameInput').value = '';
+        buildCustomParInputs(18);
+        switchSection('par-config-section');
     }
 
     // ==========================================
@@ -1698,6 +1697,7 @@ const GOLF_COURSES_DB = [
     // ==========================================
     function proceedToCourseSettings() {
         if (!selectedCourseData) return;
+
         document.getElementById('settingCourseName').innerText = selectedCourseData.name;
         document.getElementById('settingCourseProv').innerText = `📍 จังหวัด${selectedCourseData.province}`;
 
@@ -1706,7 +1706,7 @@ const GOLF_COURSES_DB = [
         
         for (let i = 1; i <= 18; i++) {
             let optionText = `หลุม ${i}`;
-            if (selectedCourseData.id !== 'custom' && selectedCourseData.holes[i-1]) {
+            if (selectedCourseData.holes[i-1]) {
                 let p = selectedCourseData.holes[i-1].par;
                 let hc = selectedCourseData.holes[i-1].hc;
                 optionText += ` (Par ${p} | HC ${hc})`;
@@ -1717,7 +1717,49 @@ const GOLF_COURSES_DB = [
         switchSection('course-settings-section');
     }
 
-    function proceedToPlayerSetup() {
+    function buildCustomParInputs(numHoles) {
+        const parContainer = document.getElementById('parInputs'); 
+        parContainer.innerHTML = '';
+        for (let i = 1; i <= numHoles; i++) {
+            parContainer.innerHTML += `
+                <div class="col-4 col-sm-3 text-center">
+                    <div class="card p-2 bg-light border shadow-sm">
+                        <label class="form-label text-muted mb-1 small fw-bold">Hole ${i}</label>
+                        <div class="d-flex align-items-center justify-content-center gap-1">
+                            <button type="button" class="btn btn-light btn-adjust-small text-danger fw-bold shadow-sm" onclick="adjustCustomPar(${i}, -1)">-</button>
+                            <span id="par_val_${i}" class="fw-bold fs-5 text-dark" style="min-width:20px; text-align:center;">4</span>
+                            <button type="button" class="btn btn-light btn-adjust-small text-success fw-bold shadow-sm" onclick="adjustCustomPar(${i}, 1)">+</button>
+                        </div>
+                    </div>
+                </div>`;
+        }
+    }
+
+    function adjustCustomPar(hole, amount) {
+        const spanEl = document.getElementById(`par_val_${hole}`);
+        let currentPar = parseInt(spanEl.innerText) + amount;
+        if (currentPar < 3) currentPar = 3; if (currentPar > 5) currentPar = 5;
+        spanEl.innerText = currentPar;
+    }
+
+    function saveCustomCourseParsAndProceed() {
+        let cName = document.getElementById('customCourseNameInput').value.trim();
+        if(cName) selectedCourseData.name = cName;
+        else selectedCourseData.name = "สนามกำหนดเอง";
+        
+        gameState.pars = {}; gameState.hcs = {}; gameState.bets = {};
+        for(let i=1; i<=18; i++) {
+            const spanEl = document.getElementById(`par_val_${i}`);
+            let p = spanEl ? parseInt(spanEl.innerText) : 4;
+            gameState.pars[i] = p;
+            gameState.hcs[i] = '-';
+            selectedCourseData.holes[i-1] = { par: p, hc: '-' };
+        }
+
+        proceedToCourseSettings();
+    }
+
+    function proceedToPlayerSetupFromSettings() {
         gameState.courseId = selectedCourseData.id;
         gameState.courseName = selectedCourseData.name;
         gameState.province = selectedCourseData.province;
@@ -1732,25 +1774,7 @@ const GOLF_COURSES_DB = [
             currentH++; if (currentH > 18) currentH = 1;
         }
 
-        if (gameState.courseId === 'custom') {
-            document.getElementById('customCourseNameInput').value = '';
-            const parContainer = document.getElementById('parInputs'); parContainer.innerHTML = '';
-            
-            gameState.holeSequence.forEach((hole) => {
-                parContainer.innerHTML += `
-                    <div class="col-4 col-sm-3 text-center">
-                        <div class="card p-2 bg-light border shadow-sm">
-                            <label class="form-label text-muted mb-1 small fw-bold">Hole ${hole}</label>
-                            <div class="d-flex align-items-center justify-content-center gap-1">
-                                <button type="button" class="btn btn-light btn-adjust-small text-danger fw-bold shadow-sm" onclick="adjustCustomPar(${hole}, -1)">-</button>
-                                <span id="par_val_${hole}" class="fw-bold fs-5 text-dark" style="min-width:20px; text-align:center;">4</span>
-                                <button type="button" class="btn btn-light btn-adjust-small text-success fw-bold shadow-sm" onclick="adjustCustomPar(${hole}, 1)">+</button>
-                            </div>
-                        </div>
-                    </div>`;
-            });
-            switchSection('par-config-section');
-        } else {
+        if (gameState.courseId !== 'custom') {
             gameState.pars = {}; gameState.hcs = {}; gameState.bets = {};
             gameState.holeSequence.forEach(hole => {
                 let hData = selectedCourseData.holes[hole - 1];
@@ -1758,36 +1782,28 @@ const GOLF_COURSES_DB = [
                 gameState.hcs[hole] = hData ? hData.hc : '-';
                 gameState.bets[hole] = gameState.baseBet;
             });
-            renderPlayerSetupList();
-            switchSection('player-setup-section');
+        } else {
+            gameState.holeSequence.forEach(hole => {
+                gameState.bets[hole] = gameState.baseBet;
+            });
         }
-    }
 
-    function adjustCustomPar(hole, amount) {
-        const spanEl = document.getElementById(`par_val_${hole}`);
-        let currentPar = parseInt(spanEl.innerText) + amount;
-        if (currentPar < 3) currentPar = 3; if (currentPar > 5) currentPar = 5;
-        spanEl.innerText = currentPar;
-    }
-
-    function saveCustomCourseAndProceed() {
-        let cName = document.getElementById('customCourseNameInput').value.trim();
-        if(cName) gameState.courseName = cName;
-        
-        gameState.pars = {}; gameState.hcs = {}; gameState.bets = {};
-        gameState.holeSequence.forEach(hole => {
-            const spanEl = document.getElementById(`par_val_${hole}`);
-            gameState.pars[hole] = spanEl ? parseInt(spanEl.innerText) : 4;
-            gameState.hcs[hole] = '-'; 
-            gameState.bets[hole] = gameState.baseBet;
-        });
         renderPlayerSetupList();
         switchSection('player-setup-section');
     }
 
     function goBackFromPlayerSetup() {
-        if (gameState.courseId === 'custom') switchSection('par-config-section');
-        else switchSection('course-settings-section');
+        if (gameState.courseId === 'custom') {
+            document.getElementById('customCourseNameInput').value = selectedCourseData.name;
+            buildCustomParInputs(18);
+            for(let i=1; i<=18; i++) {
+                let spanEl = document.getElementById(`par_val_${i}`);
+                if(spanEl) spanEl.innerText = gameState.pars[i] || 4;
+            }
+            switchSection('par-config-section');
+        } else {
+            switchSection('course-settings-section');
+        }
     }
 
     // ==========================================
