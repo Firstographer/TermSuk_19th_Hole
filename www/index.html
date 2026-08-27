@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เติมสุข 19th Hole - Luxury Golf Club Edition</title>
+    <title>เติมสุข 19th Hole</title>
     <link rel="manifest" href="manifest.json">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -144,15 +144,6 @@
             background: linear-gradient(135deg, #ffffff 0%, #34d399 55%, #fde047 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .app-hero-card p {
-            margin-top: 8px !important;
-            color: var(--accent-gold-light) !important;
-            letter-spacing: 0.12em;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.8rem;
         }
 
         /* Cards & Forms */
@@ -359,16 +350,16 @@
         }
 
         .btn-adjust {
-            width: 44px !important;
-            height: 44px !important;
-            min-height: 44px !important;
-            flex: 0 0 44px;
+            width: 38px !important;
+            height: 38px !important;
+            min-height: 38px !important;
+            flex: 0 0 38px;
             display: inline-flex !important;
             align-items: center;
             justify-content: center;
             padding: 0 !important;
             border-radius: 50% !important;
-            font-size: 1.2rem !important;
+            font-size: 1.1rem !important;
             box-shadow: var(--shadow-sm) !important;
             border: 1.5px solid var(--line) !important;
             background: #fff !important;
@@ -389,13 +380,14 @@
 
         /* Player & Score Elements */
         .player-photo-preview {
-            width: 56px !important;
-            height: 56px !important;
+            width: 46px !important;
+            height: 46px !important;
             object-fit: cover;
             border-radius: 50%;
-            border: 2.5px solid var(--accent-emerald) !important;
-            box-shadow: 0 6px 16px rgba(5, 150, 105, 0.2);
+            border: 2px solid var(--accent-emerald) !important;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
             background: #fff;
+            flex-shrink: 0;
         }
 
         .player-photo-small {
@@ -408,14 +400,15 @@
         }
 
         .score-input {
-            width: 70px !important;
-            min-height: 46px !important;
-            font-size: 1.5rem !important;
+            width: 52px !important;
+            min-height: 40px !important;
+            font-size: 1.3rem !important;
             text-align: center;
             font-weight: 900 !important;
             color: var(--ink) !important;
             background: transparent !important;
             box-shadow: none !important;
+            padding: 0 !important;
         }
 
         #playerInputs>div {
@@ -433,13 +426,13 @@
         }
 
         #scoreInputs>div {
-            min-height: 85px;
+            min-height: 75px;
             background: #fff !important;
             transition: background-color 0.15s ease;
             padding: 10px 12px !important;
         }
 
-        /* Play Section Header - Optimized for Small Mobile Screens */
+        /* Play Section Header - Compact Single Line Layout */
         #play-section>.card {
             border-top: 0 !important;
             background: #fff;
@@ -447,8 +440,8 @@
         }
 
         #play-section .card-header {
-            min-height: 100px;
-            padding: 16px 14px !important;
+            min-height: 80px;
+            padding: 14px 16px !important;
             background: radial-gradient(circle at 90% 15%, rgba(197, 160, 89, 0.2), transparent 30%), var(--primary-gradient) !important;
             color: #fff !important;
             border-bottom: 2.5px solid var(--accent-gold);
@@ -659,24 +652,29 @@
             }
 
             #play-section .card-header {
-                min-height: 95px;
-                padding: 14px 12px !important;
+                min-height: 80px;
+                padding: 12px 14px !important;
             }
 
             #scoreInputs>div {
-                padding: 10px !important;
+                padding: 8px 10px !important;
             }
 
             .score-input {
-                width: 62px !important;
-                font-size: 1.4rem !important;
+                width: 45px !important;
+                font-size: 1.2rem !important;
             }
 
             .btn-adjust {
-                width: 38px !important;
-                height: 38px !important;
-                flex-basis: 38px !important;
-                font-size: 1.1rem !important;
+                width: 34px !important;
+                height: 34px !important;
+                flex-basis: 34px !important;
+                font-size: 0.95rem !important;
+            }
+
+            .player-photo-preview {
+                width: 40px !important;
+                height: 40px !important;
             }
 
             .btn-lg {
@@ -717,25 +715,22 @@
         <div id="home-section" class="section active">
             <div class="mx-auto" style="max-width: 650px;">
                 <div class="app-hero-card">
-                    <h1 class="fw-bold mb-1 tracking-wide text-white">⛳ <span class="gradient-title-text">เติมสุข 19th
+                    <h1 class="fw-bold mb-0 tracking-wide text-white">⛳ <span class="gradient-title-text">เติมสุข 19th
                             Hole</span></h1>
-                    <p class="text-white-50 small mb-0">Luxury Golf Score & Bet Tracker</p>
                 </div>
                 <div class="card mb-4 shadow-sm border-0">
                     <div class="card-body p-4 text-center">
-                        <div class="mb-4">
-                            <span style="font-size: 3.5rem;">🏌️‍♂️✨</span>
-                            <h4 class="fw-bold text-dark mt-2">พร้อมออกรอบวันนี้หรือยัง?</h4>
-                            <p class="text-muted small">ค้นหาสนาม เก็บบันทึกสกอร์ คำนวณเดิมพัน และสรุปบิลสะสม</p>
+                        <div class="mb-4 pt-2">
+                            <span style="font-size: 4rem;">🏌️‍♂️</span>
                         </div>
                         <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm mb-3 fw-bold py-3 fs-5"
                             onclick="switchSection('course-search-section')">
-                            ⛳ เริ่มออกรอบใหม่ (Tee Off)
+                            ออกรอบใหม่
                         </button>
                         <button
                             class="btn btn-outline-secondary btn-lg w-100 rounded-pill shadow-sm py-3 fw-bold border-2"
                             onclick="showHistoryModal()">
-                            📜 ดูประวัติการแข่งขันย้อนหลัง
+                            📜 ประวัติการแข่งขันย้อนหลัง
                         </button>
                     </div>
                 </div>
@@ -746,14 +741,15 @@
         <div id="course-search-section" class="section">
             <div class="mx-auto" style="max-width: 650px;">
                 <div class="app-hero-card py-3 mb-3">
-                    <h3 class="fw-bold mb-0 text-white">📍 ค้นหาและเลือกสนาม</h3>
+                    <h3 class="fw-bold mb-0 text-white">📍 เลือกสนามกอล์ฟ</h3>
                 </div>
 
                 <!-- ปุ่มหน้าแรก -->
                 <div class="mb-3">
-                    <button class="btn btn-light border btn-lg w-100 rounded-pill fw-bold py-3 shadow-sm"
+                    <button
+                        class="btn btn-light border btn-lg w-100 rounded-pill fw-bold py-3 shadow-sm d-flex align-items-center justify-content-center gap-2"
                         onclick="switchSection('home-section')">
-                        🏠 หน้าแรก
+                        <span>🏠</span> กลับหน้าแรก
                     </button>
                 </div>
 
@@ -772,12 +768,12 @@
                         <!-- รายชื่อสนาม -->
                         <div id="courseResultsContainer" class="mb-3"></div>
 
-                        <!-- ปุ่มเพิ่มสนามใหม่ (ย้ายมาไว้ข้างล่างสุดของรายการผลลัพธ์) -->
+                        <!-- ปุ่มเพิ่มสนามใหม่ -->
                         <div class="mt-4 pt-2 border-top">
                             <button
                                 class="btn btn-outline-success w-100 fw-bold rounded-pill border-2 py-3 shadow-sm d-flex align-items-center justify-content-center gap-2"
                                 onclick="selectCustomCourseDirect()">
-                                <span>+</span> เพิ่มสนามใหม่ (กรณีไม่พบในระบบ)
+                                <span>⛳</span> หาสนามไม่เจอ ? สร้างสนามใหม่
                             </button>
                         </div>
                     </div>
@@ -820,10 +816,10 @@
                 </div>
                 <div class="d-flex justify-content-between gap-3 mb-4">
                     <button class="btn btn-light border btn-lg rounded-pill px-4 fw-bold"
-                        onclick="switchSection('course-search-section')">⬅️ กลับ</button>
+                        onclick="switchSection('course-search-section')">⬅️</button>
                     <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fw-bold py-3"
                         onclick="proceedToPlayerSetupFromSettings()">
-                        ต่อไป (จัดก๊วนผู้เล่น) ➔
+                        👥 จัดก๊วนผู้เล่น ➔
                     </button>
                 </div>
             </div>
@@ -833,7 +829,7 @@
         <div id="par-config-section" class="section">
             <div class="mx-auto" style="max-width: 650px;">
                 <div class="app-hero-card py-3 mb-3">
-                    <h3 class="fw-bold mb-0 text-white">⚙️ กำหนดค่า Par สนามของคุณ</h3>
+                    <h3 class="fw-bold mb-0 text-white">⛳ กำหนด PAR สนามของคุณ</h3>
                 </div>
                 <div class="card mb-4">
                     <div class="card-body p-4">
@@ -843,7 +839,7 @@
                             placeholder="พิมพ์ชื่อสนามของคุณที่นี่...">
 
                         <div id="totalParDisplay" class="alert alert-success text-center fw-bold py-2 mb-3">
-                            ⛳ Par รวมทั้งหมด: 72 แต้ม (อยู่ในเกณฑ์มาตรฐาน 70-73 ✅)
+                            PAR รวม: 72 · สนามมาตรฐาน 18 หลุม ✅
                         </div>
 
                         <div id="parInputs" class="row g-3 mb-3"></div>
@@ -851,10 +847,10 @@
                 </div>
                 <div class="d-flex justify-content-between gap-3 mb-4">
                     <button class="btn btn-light border btn-lg rounded-pill px-4 fw-bold"
-                        onclick="switchSection('course-search-section')">⬅️ กลับ</button>
+                        onclick="switchSection('course-search-section')">⬅️</button>
                     <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fw-bold py-3"
                         onclick="saveCustomCourseParsAndProceed()">
-                        ต่อไป (ตั้งค่าการเล่น) ➔
+                        ยืนยัน PAR สนาม ➔
                     </button>
                 </div>
             </div>
@@ -873,8 +869,9 @@
                                 <span>🏌️‍♂️</span> รายชื่อนักกอล์ฟ <span id="playerCountBadge"
                                     class="badge bg-success rounded-pill fs-6">4 คน</span>
                             </h5>
-                            <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-bold"
-                                onclick="showManageGolfersModal()">⚙️ จัดการรายชื่อ</button>
+                            <button
+                                class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-bold d-flex align-items-center gap-1"
+                                onclick="showManageGolfersModal()"><span>📋</span> จัดการรายชื่อ</button>
                         </div>
                         <div id="playerInputs" class="d-flex flex-column gap-3 mb-3"></div>
                         <button id="btnAddPlayer"
@@ -886,10 +883,10 @@
                 </div>
                 <div class="d-flex justify-content-between gap-3 mb-4">
                     <button class="btn btn-light border btn-lg rounded-pill px-4 fw-bold"
-                        onclick="goBackFromPlayerSetup()">⬅️ กลับ</button>
+                        onclick="goBackFromPlayerSetup()">⬅️</button>
                     <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fw-bold py-3"
                         onclick="startGame()">
-                        🚀 ลุยเลย! เริ่มออกรอบ
+                        🚀 เริ่มออกรอบ
                     </button>
                 </div>
             </div>
@@ -899,32 +896,35 @@
         <div id="play-section" class="section">
             <div class="card border-top border-success border-4 mx-auto" style="max-width: 650px;">
                 <div
-                    class="card-header bg-dark text-white rounded-top-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
-                    <div class="d-flex flex-column">
-                        <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                    class="card-header bg-dark text-white rounded-top-4 d-flex align-items-center justify-content-between gap-2">
+                    <!-- Left: Hole, Par & Course Info on Single Line / Balanced Layout -->
+                    <div class="d-flex flex-column" style="min-width: 0; flex-grow: 1;">
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
                             <h2 class="mb-0 fw-black text-white" id="currentHoleDisplay"
-                                style="font-size: clamp(1.4rem, 5vw, 2.1rem); letter-spacing: 0.03em;">⛳ HOLE 1</h2>
+                                style="font-size: clamp(1.2rem, 4.5vw, 1.8rem); letter-spacing: 0.02em;">⛳ HOLE 1</h2>
                             <span class="fw-bold" id="currentParText"
-                                style="font-size: clamp(1.4rem, 5vw, 2.1rem); color: var(--accent-gold-light);">PAR
-                                5</span>
+                                style="font-size: clamp(1.2rem, 4.5vw, 1.8rem); color: var(--accent-gold-light);">PAR
+                                4</span>
                         </div>
-                        <div class="text-white-50 fw-semibold d-flex align-items-center gap-2 mt-1"
-                            style="font-size: 0.9rem; letter-spacing: 0.02em;">
-                            <span id="currentHoleSubDisplay">📍 สนามกอล์ฟ...</span>
-                            <span class="badge bg-white text-dark rounded-pill fw-bold" id="currentHcBadge"
-                                style="font-size: 0.75rem; padding: 3px 8px; display: none;">HC 4</span>
+                        <div class="text-white-50 fw-semibold d-flex align-items-center gap-2 mt-1 text-truncate"
+                            style="font-size: 0.85rem; min-width: 0;">
+                            <span id="currentHoleSubDisplay" class="text-truncate"
+                                style="min-width: 0; display: inline-block;">📍 สนามกอล์ฟ...</span>
+                            <span class="badge bg-white text-dark rounded-pill fw-bold flex-shrink-0"
+                                id="currentHcBadge" style="font-size: 0.7rem; padding: 2px 6px; display: none;">HC
+                                1</span>
                         </div>
                     </div>
-                    <div class="ms-auto flex-shrink-0">
+                    <!-- Right: Compact Bet Box -->
+                    <div class="flex-shrink-0">
                         <div
-                            class="d-flex align-items-center gap-1 fw-bold bg-dark bg-opacity-50 px-2 py-1 rounded-3 border border-secondary">
-                            <span style="font-size: 1.3rem;">💸</span>
+                            class="d-flex align-items-center gap-1 fw-bold bg-dark bg-opacity-75 px-2 py-1 rounded-3 border border-secondary shadow-sm">
+                            <span style="font-size: 1.1rem;">🪙</span>
                             <input type="number" inputmode="numeric" pattern="[0-9]*" id="currentBetInput"
                                 class="form-control form-control-sm text-center fw-black bg-transparent border-0 shadow-none p-0"
-                                style="width: 60px; font-size: clamp(1.4rem, 4vw, 1.9rem); height: 38px; color: var(--accent-gold-light);"
+                                style="width: 50px; font-size: 1.4rem; height: 32px; color: var(--accent-gold-light);"
                                 min="0" oninput="updateCurrentBetFromInput(this)">
-                            <span
-                                style="color: var(--accent-gold-light); font-size: clamp(1.2rem, 4vw, 1.6rem);">฿</span>
+                            <span style="color: var(--accent-gold-light); font-size: 1.2rem;">฿</span>
                         </div>
                     </div>
                 </div>
@@ -933,25 +933,29 @@
 
                 <div class="card-footer bg-white border-0 p-3 pt-3 rounded-bottom-4">
                     <div class="row g-2 mt-1">
-                        <div class="col-4" id="prevBtnContainer">
-                            <button class="btn btn-outline-secondary btn-lg w-100 rounded-pill fw-bold py-3 border-2"
-                                onclick="prevHole()">⬅️ ก่อนหน้า</button>
+                        <div class="col-3" id="prevBtnContainer">
+                            <button
+                                class="btn btn-outline-secondary btn-lg w-100 rounded-pill fw-bold py-3 border-2 d-flex align-items-center justify-content-center"
+                                onclick="prevHole()" title="ย้อนกลับ">⬅️</button>
                         </div>
-                        <div class="col-8" id="nextBtnContainer">
-                            <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm mb-2 fw-bold py-3"
-                                onclick="showHoleSummary()">บันทึก & ถัดไป ➔</button>
+                        <div class="col-9" id="nextBtnContainer">
+                            <button
+                                class="btn btn-success btn-lg w-100 rounded-pill shadow-sm mb-2 fw-bold py-3 d-flex align-items-center justify-content-center gap-2"
+                                onclick="showHoleSummary()"><span>💾 บันทึก & ถัดไป</span> <span>➔</span></button>
                         </div>
 
                         <div class="col-4">
-                            <button class="btn btn-outline-primary w-100 rounded-pill fw-bold py-2 border-2"
+                            <button
+                                class="btn btn-outline-primary w-100 rounded-pill fw-bold py-2 border-2 text-truncate"
                                 onclick="showJumpHoleModal()">📌 เลือกหลุม</button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-outline-dark w-100 rounded-pill fw-bold py-2 border-2"
-                                onclick="showLeaderboard()">📊 บอร์ด</button>
+                            <button class="btn btn-outline-dark w-100 rounded-pill fw-bold py-2 border-2 text-truncate"
+                                onclick="showLeaderboard()">📊 กระดานผู้นำ</button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-outline-danger w-100 rounded-pill fw-bold py-2 border-2"
+                            <button
+                                class="btn btn-outline-danger w-100 rounded-pill fw-bold py-2 border-2 text-truncate"
                                 onclick="confirmEndGame()">🛑 จบเกม</button>
                         </div>
                     </div>
@@ -972,7 +976,9 @@
 
                 <div id="scorecardExportArea" class="card shadow mb-3 bg-white p-2">
                     <div class="card-header bg-dark text-white text-center py-3 rounded-4 mb-2">
-                        <h5 class="mb-1 fw-bold" id="summaryCourseName">📍 สนามกอล์ฟ</h5>
+                        <h5 class="mb-1 fw-bold px-2" id="summaryCourseName"
+                            style="min-width: 0; white-space: normal; word-break: break-word; line-height: 1.3;">📍
+                            สนามกอล์ฟ</h5>
                         <small class="text-white-50" id="summaryDateTime"></small>
                     </div>
                     <div class="card-body p-2">
@@ -993,7 +999,7 @@
 
                 <button class="btn btn-info btn-lg w-100 rounded-pill shadow-sm mb-4 fw-bold text-white py-3"
                     onclick="downloadScorecardImage()">
-                    📸 บันทึกตารางสกอร์ลงเครื่อง
+                    📥 บันทึกรูปสกอร์การแข่งขัน
                 </button>
 
                 <div id="financialExportArea" class="card shadow border-warning border-2 mb-3 bg-white">
@@ -1010,13 +1016,13 @@
 
                 <button class="btn btn-warning btn-lg w-100 rounded-pill shadow-sm mb-4 fw-bold text-dark py-3"
                     onclick="downloadFinancialSummary()">
-                    📸 บันทึกบิลเก็บเงินลงเครื่อง
+                    📥 บันทึกบิลสรุปยอดเงิน
                 </button>
 
                 <div class="card shadow mb-4">
                     <div class="card-body p-3 bg-white rounded-4">
                         <button class="btn btn-success btn-lg w-100 rounded-pill shadow-sm fw-bold py-3"
-                            onclick="finishAndSaveGame()">💾 บันทึกประวัติ & เริ่มเกมใหม่</button>
+                            onclick="finishAndSaveGame()">🏁 จบการแข่งขัน</button>
                     </div>
                 </div>
             </div>
@@ -1086,7 +1092,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content rounded-4 border-0 shadow-lg">
                 <div class="modal-header bg-dark text-white py-3">
-                    <h5 class="modal-title fw-bold">⚙️ จัดการรายชื่อที่บันทึกไว้</h5>
+                    <h5 class="modal-title fw-bold">📋 จัดการรายชื่อนักกอล์ฟ</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body bg-light p-3">
@@ -1118,7 +1124,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content rounded-4 border-0 shadow-lg">
                 <div class="modal-header bg-warning text-dark border-bottom-0 py-3">
-                    <h5 class="modal-title fw-bold" id="holeSummaryTitle">💰 สรุปเงินประจำหลุม</h5>
+                    <h5 class="modal-title fw-bold" id="holeSummaryTitle">💰 สรุปยอดเดิมพันหลุมนี้</h5>
                 </div>
                 <div class="modal-body bg-light p-3">
                     <h6 class="text-muted text-center mb-3 small fw-bold">บิลสรุปการจ่ายเงินหลุมนี้</h6>
@@ -1139,7 +1145,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content rounded-4 border-0 shadow-lg">
                 <div class="modal-header bg-dark text-white py-3">
-                    <h5 class="modal-title fw-bold">📊 ข้อมูลปัจจุบัน</h5>
+                    <h5 class="modal-title fw-bold">📊 กระดานผู้นำ</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-0">
@@ -4849,16 +4855,16 @@
             parContainer.innerHTML = '';
             for (let i = 1; i <= numHoles; i++) {
                 parContainer.innerHTML += `
-                <div class="col-4 col-sm-3 text-center">
-                    <div class="card p-2 bg-light border shadow-sm">
-                        <label class="form-label text-muted mb-1 small fw-bold">Hole ${i}</label>
-                        <div class="d-flex align-items-center justify-content-center gap-1">
-                            <button type="button" class="btn btn-light btn-adjust-small text-danger fw-bold shadow-sm" onclick="adjustCustomPar(${i}, -1)">-</button>
-                            <span id="par_val_${i}" class="fw-bold fs-5 text-dark" style="min-width:20px; text-align:center;">4</span>
-                            <button type="button" class="btn btn-light btn-adjust-small text-success fw-bold shadow-sm" onclick="adjustCustomPar(${i}, 1)">+</button>
-                        </div>
-                    </div>
-                </div>`;
+        <div class="col-4 text-center">
+            <div class="card p-2 bg-light border shadow-sm">
+                <label class="form-label text-muted mb-1 small fw-bold">Hole ${i}</label>
+                <div class="d-flex align-items-center justify-content-center gap-1">
+                    <button type="button" class="btn btn-light btn-adjust-small text-danger fw-bold shadow-sm" onclick="adjustCustomPar(${i}, -1)">-</button>
+                    <span id="par_val_${i}" class="fw-bold fs-5 text-dark" style="min-width:20px; text-align:center;">4</span>
+                    <button type="button" class="btn btn-light btn-adjust-small text-success fw-bold shadow-sm" onclick="adjustCustomPar(${i}, 1)">+</button>
+                </div>
+            </div>
+        </div>`;
             }
             updateCustomParTotal();
         }
@@ -4879,12 +4885,12 @@
             }
             const displayEl = document.getElementById('totalParDisplay');
             if (displayEl) {
-                if (total >= 70 && total <= 73) {
+                if (total == 72) {
                     displayEl.className = "alert alert-success text-center fw-bold py-2";
-                    displayEl.innerHTML = `⛳ Par รวมทั้งหมด: ${total} แต้ม (อยู่ในเกณฑ์มาตรฐาน 70-73 ✅)`;
+                    displayEl.innerHTML = `PAR รวม: ${total} · สนามมาตรฐาน 18 หลุม ✅`;
                 } else {
                     displayEl.className = "alert alert-warning text-center fw-bold py-2";
-                    displayEl.innerHTML = `⚠️ Par รวมทั้งหมด: ${total} แต้ม (นอกเหนือจากเกณฑ์มาตรฐาน 70-73)`;
+                    displayEl.innerHTML = `PAR รวม: ${total} · กำลังสร้างสนามพิเศษ ⚠️`;
                 }
             }
         }
@@ -4979,16 +4985,16 @@
 
                 newHtml += `
                 <div class="d-flex align-items-center gap-3 bg-white p-2 pe-3 rounded-4 border shadow-sm mb-2" style="transition: all 0.2s ease;">
-                    <div class="position-relative flex-shrink-0" style="width: 56px; height: 56px; margin-left: 2px;">
+                    <div class="position-relative flex-shrink-0" style="width: 46px; height: 46px; margin-left: 2px;">
                         <img id="preview_${i}" class="bg-white w-100 h-100 rounded-circle" src="${photoUrl}" style="border: 2px solid var(--accent-emerald); object-fit: cover; box-shadow: 0 4px 10px rgba(5,150,105,0.15);">
                         
-                        <label class="position-absolute d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm border border-light" style="width: 24px; height: 24px; bottom: -4px; left: -4px; cursor: pointer; z-index: 2;" title="ถ่ายรูป">
-                            <span style="font-size: 0.7rem;">📷</span>
+                        <label class="position-absolute d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm border border-light" style="width: 22px; height: 22px; bottom: -4px; left: -4px; cursor: pointer; z-index: 2;" title="ถ่ายรูป">
+                            <span style="font-size: 0.65rem;">📷</span>
                             <input type="file" accept="image/*" capture="environment" class="d-none" onchange="previewImageCompressed(this, 'preview_${i}', ${i})">
                         </label>
                         
-                        <label class="position-absolute d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm border border-light" style="width: 24px; height: 24px; bottom: -4px; right: -4px; cursor: pointer; z-index: 2;" title="เลือกรูป">
-                            <span style="font-size: 0.7rem;">🖼️</span>
+                        <label class="position-absolute d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm border border-light" style="width: 22px; height: 22px; bottom: -4px; right: -4px; cursor: pointer; z-index: 2;" title="เลือกรูป">
+                            <span style="font-size: 0.65rem;">🖼️</span>
                             <input type="file" accept="image/*" class="d-none" onchange="previewImageCompressed(this, 'preview_${i}', ${i})">
                         </label>
                     </div>
@@ -5158,7 +5164,7 @@
             const prevBtnContainer = document.getElementById('prevBtnContainer');
             const nextBtnContainer = document.getElementById('nextBtnContainer');
             if (gameState.currentHoleIndex === 0) {prevBtnContainer.style.display = 'none'; nextBtnContainer.className = 'col-12';}
-            else {prevBtnContainer.style.display = 'block'; nextBtnContainer.className = 'col-8';}
+            else {prevBtnContainer.style.display = 'block'; nextBtnContainer.className = 'col-9';}
 
             const scoreContainer = document.getElementById('scoreInputs'); scoreContainer.innerHTML = '';
 
@@ -5170,15 +5176,15 @@
                 let visScorePlus = currentScore >= maxAllowedScore ? 'visibility: hidden;' : 'visibility: visible;';
 
                 scoreContainer.innerHTML += `
-                <div class="d-flex align-items-center justify-content-between p-3 border-bottom">
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="${p.photo}" class="player-photo-preview shadow-sm" crossorigin="anonymous">
-                        <div>
-                            <strong class="fs-5 d-block">${p.name}</strong>
-                            <small id="status_p${index}" class="${statusObj.class}" style="font-size: 0.8rem;">${statusObj.text}</small>
+                <div class="d-flex align-items-center justify-content-between p-2 p-sm-3 border-bottom gap-2">
+                    <div class="d-flex align-items-center gap-2 flex-grow-1" style="min-width: 0;">
+                        <img src="${p.photo}" class="player-photo-preview shadow-sm flex-shrink-0" crossorigin="anonymous">
+                        <div class="text-truncate" style="min-width: 0;">
+                            <strong class="fs-6 d-block text-truncate">${p.name}</strong>
+                            <small id="status_p${index}" class="${statusObj.class}" style="font-size: 0.75rem;">${statusObj.text}</small>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-2 bg-light p-1 rounded-pill border">
+                    <div class="d-flex align-items-center gap-1 bg-light p-1 rounded-pill border flex-shrink-0">
                         <button id="score_minus_${index}" class="btn btn-light btn-adjust text-danger shadow-sm fw-bold" onclick="adjustScore(${index}, -1)" style="${visScoreMinus}">-</button>
                         <input type="number" inputmode="numeric" pattern="[0-9]*" id="score_p${index}" class="form-control border-0 bg-transparent score-input" value="${currentScore}" onchange="validateScoreInput(${index})">
                         <button id="score_plus_${index}" class="btn btn-light btn-adjust text-success shadow-sm fw-bold" onclick="adjustScore(${index}, 1)" style="${visScorePlus}">+</button>
@@ -5308,7 +5314,7 @@
         function showHoleSummary() {
             saveScoresToState();
             const currentHole = gameState.holeSequence[gameState.currentHoleIndex];
-            document.getElementById('holeSummaryTitle').innerText = `💰 เดิมพันหลุมที่ ${currentHole}`;
+            document.getElementById('holeSummaryTitle').innerText = `💰 สรุปยอดเดิมพันหลุมที่ ${currentHole}`;
 
             let n = gameState.players.length; let par = gameState.pars[currentHole]; let bet = gameState.bets[currentHole];
             let pairDebt = Array(n).fill(null).map(() => Array(n).fill(0));
@@ -5339,10 +5345,10 @@
             const btn = document.getElementById('btnProceedNextHole');
 
             if (isLastHole) {
-                btn.innerHTML = "ดูผลสรุปรวมทั้งหมด 🏆"; btn.className = "btn btn-dark rounded-pill w-100 btn-lg fw-bold shadow-sm py-3";
+                btn.innerHTML = "🏆 ดูผลสรุปรวมทั้งหมด"; btn.className = "btn btn-dark rounded-pill w-100 btn-lg fw-bold shadow-sm py-3";
                 btn.onclick = function () {holeSummaryModalInstance.hide(); generateSummary();};
             } else {
-                btn.innerHTML = "✅ เคลียร์เสร็จแล้ว (ไปหลุมถัดไป)"; btn.className = "btn btn-success rounded-pill w-100 btn-lg fw-bold shadow-sm py-3";
+                btn.innerHTML = "✨ ยืนยันยอด & ไปหลุมถัดไป ➔"; btn.className = "btn btn-success rounded-pill w-100 btn-lg fw-bold shadow-sm py-3";
                 btn.onclick = function () {holeSummaryModalInstance.hide(); gameState.currentHoleIndex++; saveGame(); renderPlayHole();};
             }
             holeSummaryModalInstance.show();
@@ -5465,7 +5471,7 @@
         }
 
         function generateSummary() {
-            document.getElementById('summaryCourseName').innerText = `📍 ${gameState.courseName}`;
+            document.getElementById('summaryCourseName').innerHTML = `<span class="d-inline-block w-100" style="max-width: 100%; white-space: normal; word-break: break-word;">📍 ${gameState.courseName}</span>`;
             document.getElementById('summaryDateTime').innerText = new Date().toLocaleDateString('th-TH', {year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'});
 
             let outHoles = gameState.holeSequence.filter(h => h >= 1 && h <= 9); let inHoles = gameState.holeSequence.filter(h => h >= 10 && h <= 18);
@@ -5536,7 +5542,7 @@
                 historyList.forEach((match, idx) => {
                     let outHoles = match.holeSequence.filter(h => h >= 1 && h <= 9); let inHoles = match.holeSequence.filter(h => h >= 10 && h <= 18);
                     let groupedDebtsHTML = renderGroupedDebtsToHTML(match.debts.finalDebts, match.players);
-                    container.innerHTML += `<div class="card mb-3 border-0 shadow-sm rounded-4"><div id="historyExportArea_${idx}" class="bg-white rounded-top-4"><div class="card-header bg-dark text-white d-flex justify-content-between align-items-center rounded-top-4"><span class="fw-bold">📍 ${match.courseName}</span><small class="text-white-50">${match.date}</small></div><div class="card-body p-2 bg-light"><div class="w-100 mb-1">${generateHistoryScorecardTable(match, outHoles, 'OUT')}</div><div class="w-100 mb-2">${generateHistoryScorecardTable(match, inHoles, 'IN')}</div><h6 class="text-muted fw-bold mb-2 mt-3 px-1">🧾 บิลสรุปยอดหนี้ที่ต้องเคลียร์:</h6><div class="bg-white p-2 rounded border">${groupedDebtsHTML}</div></div></div><div class="card-footer bg-light border-0 d-flex justify-content-between rounded-bottom-4"><button class="btn btn-info btn-sm rounded-pill px-3 text-white fw-bold shadow-sm" onclick="downloadHistoryScorecard(${idx})">📸 เซฟรูปลงเครื่อง</button><button class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="deleteHistoryItem(${idx})">ลบ</button></div></div>`;
+                    container.innerHTML += `<div class="card mb-3 border-0 shadow-sm rounded-4"><div id="historyExportArea_${idx}" class="bg-white rounded-top-4"><div class="card-header bg-dark text-white d-flex justify-content-between align-items-center rounded-top-4"><span class="fw-bold text-truncate" style="min-width:0; flex-grow:1;">📍 ${match.courseName}</span><small class="text-white-50 flex-shrink-0 ms-2">${match.date}</small></div><div class="card-body p-2 bg-light"><div class="w-100 mb-1">${generateHistoryScorecardTable(match, outHoles, 'OUT')}</div><div class="w-100 mb-2">${generateHistoryScorecardTable(match, inHoles, 'IN')}</div><h6 class="text-muted fw-bold mb-2 mt-3 px-1">🧾 บิลสรุปยอดหนี้ที่ต้องเคลียร์:</h6><div class="bg-white p-2 rounded border">${groupedDebtsHTML}</div></div></div><div class="card-footer bg-light border-0 d-flex justify-content-between rounded-bottom-4"><button class="btn btn-info btn-sm rounded-pill px-3 text-white fw-bold shadow-sm" onclick="downloadHistoryScorecard(${idx})">📸 เซฟรูปลงเครื่อง</button><button class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="deleteHistoryItem(${idx})">ลบ</button></div></div>`;
                 });
             }
             new bootstrap.Modal(document.getElementById('historyModal')).show();
